@@ -20,7 +20,7 @@ jobs:
 
       - name: Build .app
         run: |
-          pyinstaller --windowed --name vk-diff --clean AlbumSync.py
+          pyinstaller --windowed --name vk-diff --clean vk-diff.py
           codesign --force --deep --sign - dist/vk-diff.app
 
       - name: Upload artifact
