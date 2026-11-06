@@ -24,7 +24,7 @@ jobs:
 
       - name: Build .app
         run: |
-          ./.venv/bin/pyinstaller --windowed --name vk-diff --clean AlbumSync.py
+          ./.venv/bin/pyinstaller --windowed --name vk-diff --clean vk-diff.py
           codesign --force --deep --sign - dist/vk-diff.app
 
       - name: Upload artifact
