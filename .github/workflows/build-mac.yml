@@ -7,15 +7,15 @@ jobs:
   build:
     runs-on: macos-15-intel
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - name: Install Python with tkinter
-        run: brew install python@3.13 python-tk@3.13
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
 
       - name: Create venv and install dependencies
         run: |
-          PY="$(brew --prefix python@3.13)/bin/python3.13"
-          "$PY" -m venv .venv
+          python -m venv .venv
           ./.venv/bin/pip install --upgrade pip
           ./.venv/bin/pip install requests pillow imagehash pyinstaller
 
@@ -30,5 +30,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: vk-diff-macos-arm64
+          name: vk-diff-macos-x86_64
           path: dist/
