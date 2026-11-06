@@ -9,27 +9,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: List python files
-        run: ls -la *.py
-
       - name: Install Python with tkinter
         run: brew install python@3.13 python-tk@3.13
 
-      - name: Install dependencies
+      - name: Create venv and install dependencies
         run: |
           PY="$(brew --prefix python@3.13)/bin/python3.13"
-          "$PY" -m pip install --upgrade pip
-          "$PY" -m pip install requests pillow imagehash pyinstaller
+          "$PY" -m venv .venv
+          ./.venv/bin/pip install --upgrade pip
+          ./.venv/bin/pip install requests pillow imagehash pyinstaller
 
       - name: Check tkinter
-        run: |
-          PY="$(brew --prefix python@3.13)/bin/python3.13"
-          "$PY" -c "import tkinter; print('tkinter OK', tkinter.TkVersion)"
+        run: ./.venv/bin/python -c "import tkinter; print('tkinter OK', tkinter.TkVersion)"
 
       - name: Build .app
         run: |
-          PY="$(brew --prefix python@3.13)/bin/python3.13"
-          "$PY" -m PyInstaller --windowed --name vk-diff --clean vk-diff.py
+          ./.venv/bin/pyinstaller --windowed --name vk-diff --clean AlbumSync.py
           codesign --force --deep --sign - dist/vk-diff.app
 
       - name: Upload artifact
