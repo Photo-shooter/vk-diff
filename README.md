@@ -9,5 +9,14 @@
 - Кэширование хэшей, отчёты в CSV, логирование.
 
 ## Установка
-```bash
+Требуется Python 3.8+.
+
+На Linux доустановите Tkinter, если его нет:
+sudo apt install python3-tk
+
+Установим виртуальное окружение на всякий случай и в них зависимости
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
+
+python vk_diff.py
