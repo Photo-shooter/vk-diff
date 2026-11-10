@@ -15,8 +15,11 @@
 sudo apt install python3-tk
 
 Установим виртуальное окружение на всякий случай и в нем зависимости
+
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+
 Запускаем
+
 python vk_diff.py
